@@ -16,4 +16,54 @@
     <h2>🎯 PCOD Risk Game</h2>
     <p class="sub">Play & understand your hormonal health</p>
 
-   
+    <!-- Progress -->
+    <div class="progress">
+      <div id="bar"></div>
+    </div>
+    <p id="levelText"></p>
+
+    <!-- Question -->
+    <h3 id="question"></h3>
+
+    <!-- Options -->
+    <div class="game-options">
+      <button type="button" onclick="answer(2)">✔ Yes</button>
+      <button type="button" class="mid" onclick="answer(1)">➖ Sometimes</button>
+      <button type="button" class="secondary" onclick="answer(0)">✖ No</button>
+    </div>
+
+    <!-- Feedback -->
+    <p id="feedback"></p>
+
+    <!-- Result -->
+    <div id="resultBox" class="hidden">
+      <h2 id="resultTitle"></h2>
+      <span id="badge"></span>
+      <p id="resultMsg"></p>
+      <p id="scoreText"></p>
+
+      <div class="next-steps">
+        <p>👉 What you can do next:</p>
+        <ul id="steps"></ul>
+      </div>
+
+      <div class="actions">
+  <button type="button" onclick="openProducts()">🛍 PCOD Products</button>
+  <button type="button" onclick="openChat()">💬 Chat Support</button>
+  <button type="button" onclick="openDoctor()">👩‍⚕️ Doctor</button>
+</div>
+
+
+      <p class="note">⚠ This tool is for awareness only.</p>
+    </div>
+
+  </div>
+
+  
+  <div id="chatbot" style="display:none;">
+    <div class="chat-header">
+      PCOD Assistant 🌸
+      <span onclick="toggleChat()">✖</span>
+    </div>
+
+    <
