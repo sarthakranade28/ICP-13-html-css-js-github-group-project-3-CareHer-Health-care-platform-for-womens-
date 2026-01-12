@@ -7,14 +7,22 @@
 
 body {
   background-color: #fff7fb;
+  padding-top: 88px;
 }
 
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
   display: flex;
   align-items: center;
   padding: 14px 50px;
   background-color: #ffbfec;
 }
+
 
 .nav-logo {
   width: 60px;
@@ -59,4 +67,26 @@ body {
   object-fit: cover;
   border: 2px solid #c93779;
   cursor: pointer;
+}
+/* ===== Clock in Navbar ===== */
+.nav-clock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #c93779;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+#dateSpan {
+  font-size: 13px;
+}
+
+#timeSpan {
+  font-size: 14px;
+  font-weight: 700;
+  color: #a81f5a;
 }
