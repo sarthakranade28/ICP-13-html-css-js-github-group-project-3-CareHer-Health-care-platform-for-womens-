@@ -1,10 +1,10 @@
 let rewardOpened = false;
 
-    const diceImage = document.getElementById("reward-image");
+    const rewardImage = document.getElementById("reward-image");
     const resultElement = document.getElementById("result");
     const button = document.getElementById("roll-button");
 
-    diceImage.addEventListener("click", spinReward);
+    rewardImage.addEventListener("click", spinReward);
     button.addEventListener("click", spinReward);
 
     function spinReward() {
