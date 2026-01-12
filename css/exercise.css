@@ -31,3 +31,7 @@
     border-radius: 20px 20px 5px 5px;
     margin-bottom: 15px;
 }
+.exe-flashcard-container {
+    display: flex;
+    justify-content: center;
+}
