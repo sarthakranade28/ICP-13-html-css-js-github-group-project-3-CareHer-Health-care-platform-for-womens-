@@ -42,12 +42,12 @@ themeBtn.addEventListener('click', ()=>{
 // ===== NAVIGATION FUNCTIONS =====
 function goPCOD(){
   console.log("➡ Navigating to PCOD page");
-  window.location.href = "./pages/pcod-about.html";
+  window.location.href = "pages/pcod-about.html";
 }
 
 function goPCOS(){
   console.log("➡ Navigating to PCOS page");
-  window.location.href = "./pages/pcos-about.html";
+  window.location.href = "pages/pcos-about.html";
 }
 
 // ===== ACTIVE PAGE HIGHLIGHT =====
