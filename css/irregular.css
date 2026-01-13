@@ -58,5 +58,27 @@
 
   .card p {
     font-size: 13px;
-    color: #444;
+    color:#a53860;
   }
+  .video-card {
+  width: 100%;
+  height: 130px;
+  overflow: hidden;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.hover-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .hover-video {
+  transform: scale(1.05);
+}
