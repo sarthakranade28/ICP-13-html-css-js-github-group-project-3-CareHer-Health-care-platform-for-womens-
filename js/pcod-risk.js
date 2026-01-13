@@ -135,17 +135,17 @@ function restartQuiz() {
 
 function openProducts() {
   console.log("🛒 Opening PCOD Products page");
-  window.location.href = "pcod-products.html";
+  window.location.href = "pages/pcod-products.html";
 }
 
 function openDoctor() {
   console.log("👩‍⚕️ Opening Doctor page");
-  window.location.href = "pcod-doctor.html";
+  window.location.href = "pages/pcod-doctor.html";
 }
 
 function openDiet() {
   console.log("🥗 Opening Diet & Lifestyle page");
-  window.location.href = "pcod-diet-lifestyle.html";
+  window.location.href = "pages/pcod-diet-lifestyle.html";
 }
 
 // ================= CHATBOT =================
