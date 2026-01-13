@@ -37,12 +37,13 @@ if (themeBtn) {
 
 // ===== NAVIGATION FUNCTIONS =====
 function goPCOD() {
-  window.location.href = "C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\pages\pcod-about.html";
+  window.location.href = "./pages/pcod-about.html";
 }
 
 function goPCOS() {
-  window.location.href = "C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\pages\pcos-about.html";
+  window.location.href = "./pages/pcos-about.html";
 }
+
 
 // ===== ACTIVE PAGE HIGHLIGHT =====
 const currentPage = window.location.pathname.split("/").pop();
