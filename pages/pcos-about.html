@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PCOS Self-Assessment Quiz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="pcod-about.css">
+</head>
+
+<body>
+
+<section class="quiz-wrapper">
+
+  <h1>🌸 PCOS Self-Assessment</h1>
+  <p class="subtitle">Answer honestly to understand your hormonal health</p>
+
+  <!-- Progress -->
+  <div class="progress-box">
+    <div id="progressBar"></div>
+  </div>
+  <p id="quizProgress"></p>
+
+  <!-- Question Card -->
+  <div class="quiz-card" id="quizCard">
+    <h2 id="quizQuestion"></h2>
+
+    <div class="options">
+      <button class="yes" onclick="answer(true)">Yes</button>
+      <button class="no" onclick="answer(false)">No</button>
+    </div>
+  </div>
+
+  <!-- Result -->
+  <div id="quizResult" class="result hidden"></div>
+
+</section>
+
+<script src="pcos-about.js"></script>
+</body>
+</html>
