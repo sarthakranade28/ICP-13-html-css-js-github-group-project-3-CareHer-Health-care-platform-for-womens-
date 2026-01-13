@@ -22,8 +22,8 @@ themeBtn.addEventListener('click', ()=>{
 });
 
 // ===== NAVIGATION FUNCTIONS =====
-function goPCOD(){ window.location.href = "./pages/pcod-about.html"; }
-function goPCOS(){ window.location.href = "./pages/pcos-about.html"; }
+function goPCOD(){ window.location.href = "pages/pcod-about.html"; }
+function goPCOS(){ window.location.href = "pages/pcos-about.html"; }
 
 // ===== ACTIVE PAGE HIGHLIGHT =====
 const current = window.location.pathname.split("/").pop();
