@@ -1,3 +1,24 @@
+window.onload= function(){
+        const savedData = localStorage.getItem("userData");
+    const formContainer=document.getElementById("form-container");
+      if(savedData){
+        const userData = JSON.parse(savedData);
+        formContainer.innerHTML=`<div class="user-info">
+     <div class="profile-heading"> 
+       <img src="../images/user.jpeg" class="user-profile">Profile
+     </div>
+     <p><b>Name:</b> ${userData["first-name"]} ${userData["last-name"]}</p>
+     <p><b>Age:</b> ${userData["age"]}yrs </p>
+     <p><b>Email:</b> ${userData["email"]} </p>
+     <p><b>Contact:</b> ${userData["contact"]} </p> 
+     <button type="button" class="btn1" onclick="logOut()">Log Out</button>
+     </div>    
+     </div>`;
+      }return;
+      
+    }
+
+
 function passwordToggle(){
       const password=document.getElementById("password");
       const imgElement=document.getElementById("eye");            
