@@ -17,13 +17,31 @@
       <a href="./pages/healthCheck.html">Health Check</a>
       <a href="./pages/exercise.html">Exercise</a>
       <a href="./pages/Contact.html">Contact</a>
-      <a href="./pages/Contact.html">Reviews</a>
-      <a href="./pages/login.html"><img src="./images/woman.png" alt="login"/></a>
+      <a href="./pages/review.html">Reviews</a>
+      <a href="./pages/signup.html"><img src="./images/woman.png" alt="login"/></a>
       <div class="nav-clock">
         <span id="dateSpan"></span>
         <span id="timeSpan"></span>
       </div>
     </div>
     </div>
+
+    <div class="welcome-container">
+    <h1 id="askName">Enter your good name 🌸</h1>
+
+    <input
+      type="text"
+      id="userNameInput"
+      placeholder="Your name"
+    />
+
+    <br />
+    <button id="submitBtn" onclick="saveUserName()">Submit</button>
+
+    <h1 id="welcomeMessage">
+      <span id="userNameText"></span>
+    </h1>
+  </div>
+    
 </body>
 </html>
