@@ -27,12 +27,9 @@
     <a href="./pages/products.html">Products</a>
     <a href="./pages/contact.html">Contact</a>
     <a href="./pages/reviews.html">Reviews</a>
-    <a href="./pages/login.html">
-      <img src="./images/woman.png" class="user-icon">
-    </a>
 
     <div class="nav-clock">
-      <span id="dateSpan"></span>
+      <span id="dateSpan"></span><br>
       <span id="timeSpan"></span>
     </div>
 
@@ -48,58 +45,56 @@
   <p>Your Companion for PCOD & PCOS Awareness</p>
 </header>
 
-<!-- ===== MAIN CARD ===== -->
-<section class="card">
-  <h2>Choose What You Want to Learn</h2>
-  <p>Select a condition to understand symptoms, risks and care.</p>
 
-  <div class="choice-buttons">
-    <div class="choice-box pcod" onclick="goPCOD()">
-      <h3>🌺 PCOD</h3>
-      <p>Lifestyle-related hormonal imbalance</p>
+<!-- ===== MAIN CARD ===== --> <section class="card"> <h2>Choose What You Want to Learn</h2> <p>Select a condition to understand symptoms, risks and care.</p> <div class="choice-buttons"> <div class="choice-box pcod" onclick="goPCOD()">
+   <h3>🌺 PCOD</h3> <p>Lifestyle-related hormonal imbalance</p> </div> <div class="choice-box pcos" onclick="goPCOS()"> <h3>🌼 PCOS</h3> <p>Chronic hormonal & ovulation disorder</p> </div> </div> </section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <h3>🌸 Care Her</h3>
+      <p>PCOD & PCOS Awareness Platform</p>
     </div>
 
-    <div class="choice-box pcos" onclick="goPCOS()">
-      <h3>🌼 PCOS</h3>
-      <p>Chronic hormonal & ovulation disorder</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="./pages/healthCheck.html">Health Check</a>
+      <a href="./pages/products.html">Products</a>
+      <a href="./pages/contact.html">Contact</a>
+    </div>
+
+    <div class="footer-note">
+      💗 Your health, our priority
     </div>
   </div>
-</section>
 
-<footer>© 2026 Care Her | Women’s Health Matters</footer>
+  <div class="footer-bottom" id="footerYear"></div>
+</footer>
 
-<!-- ===== JAVASCRIPT (MERGED & SEQUENCED) ===== -->
+<!-- ===== JAVASCRIPT ===== -->
 <script>
-// PAGE LOAD
-console.log("Care Her Home Page Loaded");
-
-// MENU TOGGLE
+/* ===== MENU TOGGLE ===== */
 function toggleMenu(){
-  const menu = document.getElementById("menu");
-  menu.classList.toggle("active");
-  console.log("Menu toggled:", menu.classList.contains("active"));
+  document.getElementById("menu").classList.toggle("active");
 }
 
-// CLOCK
-const dateSpan = document.getElementById("dateSpan");
-const timeSpan = document.getElementById("timeSpan");
-
+/* ===== CLOCK ===== */
 function updateClock(){
   const now = new Date();
-  dateSpan.innerText = now.toDateString();
-  timeSpan.innerText = now.toLocaleTimeString();
+  document.getElementById("dateSpan").innerText = now.toDateString();
+  document.getElementById("timeSpan").innerText = now.toLocaleTimeString();
 }
 updateClock();
 setInterval(updateClock, 1000);
 
-// DARK MODE (localStorage)
+/* ===== DARK MODE ===== */
 const themeBtn = document.getElementById("themeBtn");
 const savedTheme = localStorage.getItem("theme");
 
 if(savedTheme === "dark"){
   document.body.classList.add("dark");
   themeBtn.innerText = "☀️ Light Mode";
-  console.log("Dark mode loaded");
 }
 
 themeBtn.addEventListener("click", ()=>{
@@ -108,40 +103,24 @@ themeBtn.addEventListener("click", ()=>{
   if(document.body.classList.contains("dark")){
     localStorage.setItem("theme","dark");
     themeBtn.innerText = "☀️ Light Mode";
-    console.log("Dark mode enabled");
   } else {
     localStorage.setItem("theme","light");
     themeBtn.innerText = "🌙 Dark Mode";
-    console.log("Light mode enabled");
   }
 });
 
-// NAVIGATION
+/* ===== PAGE NAVIGATION ===== */
 function goPCOD(){
-  localStorage.setItem("lastVisited","PCOD");
-  console.log("Go to PCOD page");
-  window.location.href="./pages/pcod-about.html";
+  window.location.href = "pages/pcod-about.html";
 }
 
 function goPCOS(){
-  localStorage.setItem("lastVisited","PCOS");
-  console.log("Go to PCOS page");
-  window.location.href="./pages/pcos-about.html";
+  window.location.href = "pages/pcos-about.html";
 }
 
-// ACTIVE PAGE
-const current = window.location.pathname.split("/").pop();
-document.querySelectorAll(".menu a").forEach(link=>{
-  if(link.getAttribute("href") === current){
-    link.classList.add("active");
-  }
-});
-
-// LAST VISIT
-const lastVisited = localStorage.getItem("lastVisited");
-if(lastVisited){
-  console.log("Last visited:", lastVisited);
-}
+/* ===== FOOTER YEAR ===== */
+document.getElementById("footerYear").innerText =
+  `© ${new Date().getFullYear()} Care Her. All rights reserved.`;
 </script>
 
 </body>

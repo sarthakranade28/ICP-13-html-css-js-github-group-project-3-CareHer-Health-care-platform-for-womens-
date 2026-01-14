@@ -4,10 +4,238 @@
   <meta charset="UTF-8">
   <title>PCOS Products | Shopping</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\css\pcod-products.css">
-</head>
 
+  <style>
+  /* ===== RESET ===== */
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Roboto',sans-serif;
+  }
+
+  /* ===== THEME VARIABLES ===== */
+  :root{
+    --primary:#d63384;
+    --secondary:#ff6fae;
+    --bg:#fff0f6;
+    --card:#ffffff;
+    --text:#333;
+    --input-bg:#fff;
+    --input-border:#ccc;
+  }
+  body.dark{
+    --primary:#ff6fae;
+    --secondary:#ff9ccc;
+    --bg:#1e1e1e;
+    --card:#2c2c2c;
+    --text:#eee;
+    --input-bg:#333;
+    --input-border:#555;
+  }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    transition:0.3s;
+    padding-top:90px;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  /* ===== DARK MODE BUTTON ===== */
+  #themeBtn{
+    position:fixed;
+    top:15px;
+    right:15px;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:none;
+    cursor:pointer;
+    background:var(--primary);
+    color:white;
+    font-size:18px;
+    z-index:1000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.2s, background 0.3s;
+  }
+  #themeBtn:hover{transform:scale(1.1);opacity:0.9;}
+
+  /* ===== HEADER ===== */
+  .top-bar{
+    width:100%;
+    position:fixed;
+    top:0;
+    background:var(--card);
+    padding:15px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    z-index:10;
+    transition:0.3s;
+  }
+  .top-bar input{
+    padding:8px 12px;
+    border-radius:8px;
+    border:1px solid var(--input-border);
+    outline:none;
+    background:var(--input-bg);
+    color:var(--text);
+    transition:0.3s;
+  }
+
+  /* ===== LAYOUT ===== */
+  .container{
+    max-width:1100px;
+    width:100%;
+    display:flex;
+    gap:20px;
+    padding:20px;
+    transition:0.3s;
+  }
+  .filters{
+    width:220px;
+    background:var(--card);
+    padding:20px;
+    border-radius:16px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.05);
+    transition:0.3s;
+  }
+  .filters h3{margin-bottom:12px;}
+  .filters label{display:block;margin:6px 0;cursor:pointer;}
+
+  .products{
+    flex:1;
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+    gap:20px;
+    transition:0.3s;
+  }
+
+  .product-card{
+    background:var(--card);
+    border-radius:18px;
+    padding:15px;
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s, box-shadow 0.3s;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+  }
+  .product-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 15px 35px rgba(0,0,0,0.15);
+  }
+  .product-card img{
+    width:100%;
+    border-radius:12px;
+  }
+  .price span{
+    text-decoration:line-through;
+    font-size:13px;
+    color:gray;
+  }
+
+  /* ===== MODAL ===== */
+  .modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.6);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:200;
+  }
+  .modal-content{
+    background:var(--card);
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    width:300px;
+    color:var(--text);
+    transition:0.3s;
+    position:relative;
+  }
+  .close{
+    position:absolute;
+    top:10px;
+    right:12px;
+    font-size:18px;
+    cursor:pointer;
+  }
+  .buy{
+    margin-top:12px;
+    padding:10px 16px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    color:white;
+    cursor:pointer;
+  }
+  .buy:hover{opacity:0.9;}
+
+  /* ===== FOOTER ===== */
+  .footer{
+    width:100%;
+    margin-top:40px;
+    background:linear-gradient(135deg,var(--bg),#ffd6e8);
+    border-top:1px solid rgba(0,0,0,0.08);
+    transition:0.3s;
+  }
+  body.dark .footer{
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    border-top:1px solid #333;
+  }
+  .footer-content{
+    max-width:1100px;
+    margin:auto;
+    padding:30px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    text-align:center;
+  }
+  .footer-links{
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  .footer-links a{
+    text-decoration:none;
+    font-size:14px;
+    color:var(--text);
+    opacity:0.85;
+    transition:0.3s;
+  }
+  .footer-links a:hover{color:var(--primary);opacity:1;}
+  .footer-bottom{
+    text-align:center;
+    padding:12px;
+    font-size:13px;
+    opacity:0.7;
+    background:rgba(255,255,255,0.5);
+    transition:0.3s;
+  }
+  body.dark .footer-bottom{background:rgba(0,0,0,0.4);}
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:768px){
+    .container{flex-direction:column;}
+    .filters{width:100%;}
+    .footer-content{flex-direction:column;gap:20px;}
+  }
+  </style>
 <body>
+
+<!-- DARK MODE BUTTON -->
+<button id="themeBtn">🌙</button>
 
 <!-- HEADER -->
 <header class="top-bar">
@@ -32,79 +260,19 @@
 
   <!-- PRODUCTS -->
   <main class="products" id="productList">
-
-    <!-- 1–6 -->
-    <div class="product-card" onclick="openProduct('Zenius PCOS Care Capsule','₹727','Ayurvedic capsules to support hormonal balance & menstrual regularity.')">
-      <img src="1.png">
-      <h4>Zenius PCOS Care Capsule</h4>
-      <p class="price">₹727 <span>₹749</span></p>
-      <p class="seller">Seller: 1mg</p>
+    <!-- Example Product Cards -->
+    <div class="product-card" onclick="openProduct('PCOS Capsule A','₹799','Supports hormone balance')">
+      <img src="1.png" alt="PCOS Capsule A">
+      <h4>PCOS Capsule A</h4>
+      <p class="price">₹799 <span>₹849</span></p>
+      <p>Seller: 1mg</p>
     </div>
-
-    <div class="product-card" onclick="openProduct('Nveda PCOS Care Capsule','₹430','Herbal formulation for PCOS & hormonal balance.')">
-      <img src="2.png">
-      <h4>Nveda PCOS Care Capsule</h4>
-      <p class="price">₹430 <span>₹690</span></p>
-      <p class="seller">Seller: 1mg</p>
+    <div class="product-card" onclick="openProduct('PCOS Supplement B','₹950','Boosts metabolism')">
+      <img src="2.png" alt="PCOS Supplement B">
+      <h4>PCOS Supplement B</h4>
+      <p class="price">₹950 <span>₹999</span></p>
+      <p>Seller: HealthKart</p>
     </div>
-
-    <div class="product-card" onclick="openProduct('Cureayu PCOS Wellness','₹749','Supports ovulation, reduces acne & weight concerns.')">
-      <img src="3.png">
-      <h4>Cureayu PCOS Wellness</h4>
-      <p class="price">₹749 <span>₹936</span></p>
-      <p class="seller">Seller: Amazon</p>
-    </div>
-
-    <div class="product-card" onclick="openProduct('PCOS Complete Care Kit','₹999','Complete PCOS care including tablets, tea & supplements.')">
-      <img src="4.png">
-      <h4>PCOS Complete Care Kit</h4>
-      <p class="price">₹999 <span>₹1299</span></p>
-      <p class="seller">Seller: PharmEasy</p>
-    </div>
-
-    <div class="product-card" onclick="openProduct('Hormonal Balance Tablets','₹599','Supports insulin resistance & menstrual cycle regulation.')">
-      <img src="6.png">
-      <h4>Hormonal Balance Tablets</h4>
-      <p class="price">₹599 <span>₹799</span></p>
-      <p class="seller">Seller: 1mg</p>
-    </div>
-
-    <div class="product-card" onclick="openProduct('PCOS Period Relief','₹499','Helps reduce cramps, bloating & period discomfort.')">
-      <img src="7.png">
-      <h4>PCOS Period Relief</h4>
-      <p class="price">₹499 <span>₹699</span></p>
-      <p class="seller">Seller: Amazon</p>
-    </div>
-
-    <!-- 7–25 (Additional Products) -->
-    <div class="product-card" onclick="openProduct('Vaidban PCOS Complete Kit','₹1,299','Ayurvedic solution for hormone balance & cycle regularity.')">
-      <img src="8.png">
-      <h4>Vaidban PCOS Complete Kit</h4>
-      <p class="price">₹1,299 <span>₹1,599</span></p>
-      <p class="seller">Seller: Amazon</p>
-    </div>
-
-    <div class="product-card" onclick="openProduct('Seven Cure PCOS Tablets','₹899','Myo-Inositol & NAC for PCOS symptom management.')">
-      <img src="9.png">
-      <h4>Seven Cure PCOS Tablets</h4>
-      <p class="price">₹899 <span>₹1,199</span></p>
-      <p class="seller">Seller: PharmEasy</p>
-    </div>
-
-    <div class="product-card" onclick="openProduct('Narie PCOS Care','₹749','Supports ovarian health & hormonal balance.')">
-      <img src="10.png">
-      <h4>Narie PCOS Care</h4>
-      <p class="price">₹749 <span>₹999</span></p>
-      <p class="seller">Seller: 1mg</p>
-    </div>
-
-    <div class="product-card" onclick="openProduct('Grocare Turmeric Supplement','₹599','Anti-inflammatory support for ovarian & hormonal health.')">
-      <img src="11.png">
-      <h4>Grocare Turmeric Supplement</h4>
-      <p class="price">₹599 <span>₹799</span></p>
-      <p class="seller">Seller: Amazon</p>
-    </div>
-
   </main>
 
 </div>
@@ -120,6 +288,59 @@
   </div>
 </div>
 
-<script src="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\js\pcos-products.js"></script>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-links">
+      <a href="#">Home</a>
+      <a href="#">Products</a>
+      <a href="#">Diet & Lifestyle</a>
+      <a href="#">Consult Doctor</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; <span id="year"></span> CareHer. All Rights Reserved.
+  </div>
+</footer>
+
+<script>
+// ===== AUTO YEAR =====
+document.getElementById("year").innerText = new Date().getFullYear();
+
+// ===== DARK MODE =====
+const themeBtn = document.getElementById("themeBtn");
+
+// Load saved theme
+if(localStorage.getItem("theme")==="dark"){
+  document.body.classList.add("dark");
+  themeBtn.innerText = "☀️";
+} else {
+  themeBtn.innerText = "🌙";
+}
+
+// Toggle dark mode
+themeBtn.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  const dark = document.body.classList.contains("dark");
+  localStorage.setItem("theme", dark ? "dark" : "light");
+  themeBtn.innerText = dark ? "☀️" : "🌙";
+});
+
+// ===== PRODUCT MODAL =====
+const modal = document.getElementById("productModal");
+const modalTitle = document.getElementById("modalTitle");
+const modalPrice = document.getElementById("modalPrice");
+const modalDesc = document.getElementById("modalDesc");
+
+function openProduct(name, price, desc){
+  modal.style.display = "flex";
+  modalTitle.innerText = name;
+  modalPrice.innerText = price;
+  modalDesc.innerText = desc;
+}
+function closeProduct(){ modal.style.display = "none"; }
+window.onclick = e => { if(e.target==modal) modal.style.display="none"; }
+</script>
+
 </body>
 </html>

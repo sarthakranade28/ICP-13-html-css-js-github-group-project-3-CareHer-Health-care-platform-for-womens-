@@ -3,42 +3,161 @@
 <head>
   <meta charset="UTF-8">
   <title>Healthy Lifestyle for PCOD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- External CSS -->
   <link rel="stylesheet" href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\css\pcod-diet-lifestyle.css">
+
+  <style>
+    /* ================= THEME VARIABLES ================= */
+    :root{
+      --primary:#d63384;
+      --secondary:#ff6fae;
+      --bg:#fff0f6;
+      --card:#ffffff;
+      --text:#333;
+    }
+    body.dark{
+      --primary:#ff6fae;
+      --secondary:#ff9ccc;
+      --bg:#1e1e1e;
+      --card:#2c2c2c;
+      --text:#eee;
+    }
+
+    /* ================= GLOBAL ================= */
+    * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body {
+      margin:0;
+      min-height:100vh;
+      background:linear-gradient(135deg,var(--bg),#ffffff);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+      padding:20px;
+      transition:0.3s;
+    }
+    body.dark { background:linear-gradient(135deg,var(--primary),var(--bg)); }
+
+    /* ================= LIFESTYLE CARD ================= */
+    .lifestyle-card {
+      max-width:900px;
+      margin:auto;
+      background:var(--card);
+      border-radius:20px;
+      padding:30px;
+      box-shadow:0 20px 45px rgba(0,0,0,0.15);
+      color:var(--text);
+      transition:0.3s;
+    }
+    body.dark .lifestyle-card {
+      border:2px solid transparent;
+      background-image:
+        linear-gradient(var(--card), var(--card)),
+        linear-gradient(135deg,var(--primary),var(--secondary));
+      background-origin:border-box;
+      background-clip:padding-box, border-box;
+    }
+
+    h2 { text-align:center; color:var(--primary); }
+    .intro { text-align:center; color:#555; margin-bottom:30px; }
+    .section { margin-bottom:35px; }
+    .section-head { display:flex; align-items:center; gap:12px; }
+    .section-head img { width:45px; }
+    .checklist { list-style:none; padding:0; }
+    .checklist li { background:#f8f8f8; margin:8px 0; padding:12px; border-radius:12px; }
+
+    /* FOOD CARDS */
+    .food-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(120px,1fr)); gap:15px; margin:15px 0; }
+    .food-card { background:#fff0f6; border-radius:16px; padding:12px; text-align:center; }
+    .food-card img { width:60px; }
+    .food-card p { margin-top:8px; font-size:14px; }
+
+    /* ROUTINE */
+    .routine-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:14px; }
+    .box { background:linear-gradient(135deg, #f8bbd0, #e1bee7); padding:14px; text-align:center; border-radius:14px; }
+
+    /* PROGRESS */
+    .progress-box { background:#fde4ec; padding:20px; border-radius:16px; }
+    .progress-bar { height:16px; background:#ddd; border-radius:10px; overflow:hidden; }
+    #lifeBar { height:100%; width:0%; background:linear-gradient(to right, var(--primary), var(--secondary)); transition:0.6s ease; }
+
+    button {
+      margin-top:15px; width:100%; padding:12px; border:none; border-radius:14px;
+      background:linear-gradient(135deg,var(--primary),var(--secondary));
+      color:white; font-size:16px; cursor:pointer; transition:0.3s;
+    }
+    button:hover { opacity:0.9; }
+    .tip { text-align:center; margin-top:20px; }
+
+    /* ================= FOOTER ================= */
+    .footer { width:100%; margin-top:40px; background:linear-gradient(135deg,var(--bg),#ffd6e8); border-top:1px solid rgba(0,0,0,0.08); transition:0.3s; }
+    body.dark .footer { background:linear-gradient(135deg,var(--primary),var(--secondary)); border-top:1px solid #333; }
+    .footer-content { max-width:1100px; margin:auto; padding:30px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; text-align:center; }
+    .footer-brand h3 { color:var(--primary); font-size:20px; }
+    .footer-brand p { font-size:14px; color:var(--text); opacity:0.8; }
+    .footer-links { display:flex; gap:18px; flex-wrap:wrap; }
+    .footer-links a { text-decoration:none; font-size:14px; color:var(--text); opacity:0.85; transition:0.3s; }
+    .footer-links a:hover { color:var(--primary); opacity:1; }
+    .footer-note { font-size:14px; color:var(--text); opacity:0.8; }
+    .footer-bottom { text-align:center; padding:12px; font-size:13px; color:var(--text); opacity:0.7; background:rgba(255,255,255,0.5); }
+    body.dark .footer-bottom { background:rgba(0,0,0,0.4); }
+
+    /* ================= DARK MODE BUTTON ================= */
+    #themeBtn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      background: var(--primary);
+      color: white;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: transform 0.2s, background 0.3s;
+    }
+    #themeBtn:hover {
+      transform: scale(1.1);
+      opacity: 0.9;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width:768px){ 
+      .footer-content{ flex-direction:column; gap:20px; }
+    }
+  </style>
 </head>
+
 <body>
+
+<!-- ===== DARK MODE TOGGLE ===== -->
+<button id="themeBtn" title="Toggle Dark Mode">🌙</button>
 
 <div class="card lifestyle-card">
 
   <h2>🌸 Healthy Lifestyle for PCOD</h2>
-  <p class="intro">
-    Simple daily habits can help control PCOD naturally 💗
-  </p>
+  <p class="intro">Simple daily habits can help control PCOD naturally 💗</p>
 
   <!-- DIET -->
   <div class="section">
     <div class="section-head">
-      <img src="image.png">
+      <img src="image.png" alt="diet">
       <h3>🥗 PCOD-Friendly Diet</h3>
     </div>
 
-    <!-- FOOD CARDS -->
     <div class="food-grid">
-      <div class="food-card">
-        <img src="fruit.png">
-        <p>Low Sugar Fruits</p>
-      </div>
-      <div class="food-card">
-        <img src="vegetables.png">
-        <p>Green Vegetables</p>
-      </div>
-      <div class="food-card">
-        <img src="grains.png">
-        <p>Whole Grains</p>
-      </div>
-      <div class="food-card">
-        <img src="nuts.png">
-        <p>Nuts & Seeds</p>
-      </div>
+      <div class="food-card"><img src="fruit.png"><p>Low Sugar Fruits</p></div>
+      <div class="food-card"><img src="vegetables.png"><p>Green Vegetables</p></div>
+      <div class="food-card"><img src="grains.png"><p>Whole Grains</p></div>
+      <div class="food-card"><img src="nuts.png"><p>Nuts & Seeds</p></div>
     </div>
 
     <ul class="checklist">
@@ -103,16 +222,79 @@
     <button onclick="calculateProgress()">Check My Progress</button>
   </div>
 
-  <p class="tip">
-    💡 Consistency is more important than perfection.
-  </p>
+  <p class="tip">💡 Consistency is more important than perfection.</p>
 
 </div>
 
-<footer>
-  © 2026 CareHer | Women’s PCOD Healthcare Support
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-content">
+
+    <div class="footer-brand">
+      <h3>🌸 Care Her</h3>
+      <p>PCOD & PCOS Awareness Platform</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="./pages/healthCheck.html">Health Check</a>
+      <a href="./pages/products.html">Products</a>
+      <a href="./pages/contact.html">Contact</a>
+    </div>
+
+    <div class="footer-note">
+      💗 Your health, our priority
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © <span id="year"></span> Care Her. All rights reserved.
+  </div>
 </footer>
 
-<script src="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\js\pcod-diet-lifestyle.js"></script>
+<script>
+/* ===== DARK MODE ===== */
+const themeBtn = document.getElementById("themeBtn");
+
+// Set initial theme
+if(localStorage.getItem("theme") === "dark"){
+  document.body.classList.add("dark");
+  themeBtn.innerText = "☀️";
+} else {
+  themeBtn.innerText = "🌙";
+}
+
+// Toggle dark mode
+themeBtn.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  const dark = document.body.classList.contains("dark");
+  localStorage.setItem("theme", dark ? "dark" : "light");
+  themeBtn.innerText = dark ? "☀️" : "🌙";
+});
+
+/* ===== AUTO YEAR ===== */
+document.getElementById("year").innerText = new Date().getFullYear();
+
+/* ===== HABIT TRACKER ===== */
+const habits = document.querySelectorAll(".habit");
+const progressText = document.getElementById("progressText");
+const lifeBar = document.getElementById("lifeBar");
+
+habits.forEach((box, index) => {
+  const key = "pcodHabit" + index;
+  if(localStorage.getItem(key)==="true") box.checked = true;
+  box.addEventListener("change", () => localStorage.setItem(key, box.checked));
+});
+
+function calculateProgress(){
+  let completed=0;
+  habits.forEach(h => h.checked && completed++);
+  const percent = Math.round((completed / habits.length)*100);
+  lifeBar.style.width = percent + "%";
+  progressText.innerText = percent + "% Healthy Habits Completed";
+}
+</script>
+
 </body>
 </html>

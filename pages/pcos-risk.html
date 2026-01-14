@@ -4,10 +4,209 @@
   <meta charset="UTF-8">
   <title>PCOS Risk Quiz</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\css\pcod-risk.css">
+
+  <style>
+  /* ===== THEME VARIABLES ===== */
+  :root{
+    --primary:#d63384;
+    --secondary:#ff6fae;
+    --bg:#fff0f6;
+    --card:#ffffff;
+    --text:#333;
+  }
+
+  body.dark{
+    --primary:#ff6fae;
+    --secondary:#ff9ccc;
+    --bg:#1e1e1e;
+    --card:#2c2c2c;
+    --text:#eee;
+  }
+
+  /* ===== GLOBAL ===== */
+  *{ box-sizing:border-box; font-family:Segoe UI,sans-serif; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    transition:0.3s;
+    padding-top:80px;
+  }
+
+  /* ===== DARK MODE BUTTON ===== */
+  #themeBtn{
+    position:fixed;
+    top:15px;
+    right:15px;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:none;
+    cursor:pointer;
+    background:var(--primary);
+    color:white;
+    font-size:18px;
+    z-index:1000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 4px 12px rgba(0,0,0,0.3);
+    transition:0.3s;
+  }
+  #themeBtn:hover{transform:scale(1.1);opacity:0.9;}
+
+  /* ===== QUIZ CARD ===== */
+  .card{
+    width:380px;
+    background:var(--card);
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    text-align:center;
+    transition:0.3s;
+  }
+
+  .sub{ font-size:14px; opacity:0.7; }
+
+  .progress{
+    height:8px;
+    background:#ddd;
+    border-radius:10px;
+    overflow:hidden;
+    margin:15px 0;
+  }
+
+  #bar{
+    height:100%;
+    width:0%;
+    background:linear-gradient(to right,var(--primary),var(--secondary));
+    transition:0.4s;
+  }
+
+  .game-options button{
+    width:100%;
+    margin:6px 0;
+    padding:12px;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    background:var(--primary);
+    color:white;
+    transition:0.3s;
+  }
+
+  .game-options .mid{ background:var(--secondary); }
+  .game-options .secondary{ background:#ddd; color:#333; }
+
+  .hidden{ display:none; }
+
+  #badge{
+    display:inline-block;
+    padding:6px 14px;
+    border-radius:20px;
+    margin:10px 0;
+  }
+
+  .low{ background:#e8f5e9; color:green; }
+  .medium{ background:#fff3e0; color:#ff9800; }
+  .high{ background:#fdecea; color:red; }
+
+  ul{ text-align:left; font-size:14px; }
+
+  .actions{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:8px;
+    margin-top:12px;
+  }
+
+  .actions button{
+    padding:10px;
+    border:none;
+    border-radius:20px;
+    background:var(--primary);
+    color:white;
+    font-size:13px;
+    cursor:pointer;
+  }
+
+  .big-btn{
+    width:100%;
+    padding:14px;
+    margin-top:12px;
+    font-size:16px;
+    border:none;
+    border-radius:15px;
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    color:white;
+  }
+
+  .restart{
+    margin-top:10px;
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:15px;
+    background:var(--secondary);
+    color:white;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer{
+    width:100%;
+    margin-top:40px;
+    background:linear-gradient(135deg,var(--bg),#ffd6e8);
+    border-top:1px solid rgba(0,0,0,0.08);
+    transition:0.3s;
+  }
+  body.dark .footer{
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+  }
+
+  .footer-content{
+    max-width:1100px;
+    margin:auto;
+    padding:30px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    text-align:center;
+  }
+
+  .footer-links{
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+
+  .footer-links a{
+    text-decoration:none;
+    color:var(--text);
+    opacity:0.85;
+  }
+
+  .footer-bottom{
+    text-align:center;
+    padding:12px;
+    font-size:13px;
+    opacity:0.7;
+    background:rgba(255,255,255,0.5);
+  }
+  body.dark .footer-bottom{
+    background:rgba(0,0,0,0.4);
+  }
+  </style>
 </head>
 
 <body>
+
+<!-- DARK MODE BUTTON -->
+<button id="themeBtn">🌙</button>
 
 <div class="card">
 
@@ -59,24 +258,46 @@
 
 </div>
 
-<!-- CHAT SUPPORT -->
-<div id="chatbot" class="chatbot hidden">
-  <div class="chat-header">
-    PCOS Chat Support 💗
-    <span onclick="toggleChat()">✖</span>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-links">
+      <a href="#">Home</a>
+      <a href="#">Products</a>
+      <a href="#">Diet & Lifestyle</a>
+      <a href="#">Consult Doctor</a>
+    </div>
   </div>
-
-  <div class="chat-body" id="chatBody">
-    <div class="bot">Hello 🌸 How can I help you with PCOS?</div>
+  <div class="footer-bottom">
+    &copy; <span id="year"></span> CareHer. All Rights Reserved.
   </div>
+</footer>
 
-  <div class="chat-input">
-    <input type="text" id="chatInput" placeholder="Ask about PCOS..." />
-    <button onclick="sendMessage()">Send</button>
-  </div>
-</div>
+<script>
+// ===== AUTO YEAR =====
+document.getElementById("year").innerText = new Date().getFullYear();
 
-<!-- JS FILE (PCOS QUESTIONS LOGIC) -->
-<script src="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\js\pcos-risk.js"></script>
+// ===== DARK MODE =====
+const themeBtn = document.getElementById("themeBtn");
+
+// Load saved theme
+if(localStorage.getItem("theme")==="dark"){
+  document.body.classList.add("dark");
+  themeBtn.innerText = "☀️";
+} else {
+  themeBtn.innerText = "🌙";
+}
+
+// Toggle dark mode
+themeBtn.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  const dark = document.body.classList.contains("dark");
+  localStorage.setItem("theme", dark ? "dark" : "light");
+  themeBtn.innerText = dark ? "☀️" : "🌙";
+});
+</script>
+
+<script src="pcos-risk.js"></script>
+
 </body>
 </html>
