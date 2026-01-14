@@ -37,12 +37,13 @@
   
 }
 .input-box{
+    background-color: #fff7fb;
   width: 300px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
 }
-.form-item:focus{
+.input-box:focus{
   outline: none;
 }
 

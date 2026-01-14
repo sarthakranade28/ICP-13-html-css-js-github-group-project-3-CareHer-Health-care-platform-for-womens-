@@ -30,8 +30,10 @@
         </div>
         <div class="item-holder">
           <input type="email" class="input-box" id="email" placeholder="Email" required></div>
-         <div><input type="password" class="input-box" id="pass" placeholder="Password" required>
-        </div>
+         <div class="password-container">      
+          <input type="password" class="input-box" id="password" placeholder="Password" required>
+          <img src="../images/hide.png" class="eye-img" id="eye" onclick="passwordToggle()">
+          </div>
           <button type="button" class="btn" onclick="login()">Login</button>
            <p style="margin-top: -12px; font-size: 14px; text-align: center;">if new user create account <a href="signup.html" onclick="emptyUserData()">signup</a></p>
       </form>
