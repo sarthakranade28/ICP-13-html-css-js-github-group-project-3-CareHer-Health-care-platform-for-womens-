@@ -91,12 +91,13 @@ body {
 
 .health-container {
   max-width: 1200px;
-  margin: 4rem auto;
+  margin: 1.5rem auto 4rem;
   padding: 2rem;
   text-align: center;
 }
 
 .health-container h2 {
+  margin-top: 0;
   font-size: 2.4rem;
   color: #a53860;
   margin-bottom: 0.5rem;
@@ -105,7 +106,7 @@ body {
 .subtitle {
   color: #7a2146;
   font-size: 1.1rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 
