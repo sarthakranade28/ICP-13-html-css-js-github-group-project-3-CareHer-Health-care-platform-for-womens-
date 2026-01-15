@@ -11,25 +11,35 @@ function updateClock() {
 updateClock();
 setInterval(updateClock, 1000);
 
-function calculateCycle() {
-  const age = parseInt(document.getElementById("age").value);
-  const lastPeriodInput = document.getElementById("lastPeriod").value;
-  const cycleLength = parseInt(document.getElementById("cycleLength").value);
-  const periodDuration = parseInt(document.getElementById("periodDuration").value);
-  const flowDesc = document.getElementById("flowIntensity").value;
-  const moodDesc = document.getElementById("moodSwings").value;
+function handleSubmit(event) {
+  event.preventDefault();
+  calculateCycle();
+}
 
-  if (!lastPeriodInput || !age || !cycleLength || !periodDuration) {
-    document.getElementById("results").innerHTML = "<p>Please fill all required fields.</p>";
-    document.getElementById("regularityButton").style.display = "none";
+function calculateCycle(savedData = null) {
+  const data = {
+    age: parseInt(document.getElementById("age").value),
+    lastPeriod: document.getElementById("lastPeriod").value,
+    cycleLength: parseInt(document.getElementById("cycleLength").value),
+    periodDuration: parseInt(document.getElementById("periodDuration").value),
+    flow: document.getElementById("flowIntensity").value,
+    mood: document.getElementById("moodSwings").value
+  };
+
+  if (!savedData) {
+  if (!data.age || !data.lastPeriod || !data.cycleLength || !data.periodDuration) {
+      alert("Please fill all required fields");
     return;
   }
+  localStorage.setItem("periodData", JSON.stringify(data));
+  }
 
-  const lastPeriod = new Date(lastPeriodInput);
+
+  const lastPeriod = new Date(data.lastPeriod);
 
   // Calculate next period, ovulation, luteal phase
   const nextPeriod = new Date(lastPeriod);
-  nextPeriod.setDate(lastPeriod.getDate() + cycleLength);
+  nextPeriod.setDate(lastPeriod.getDate() + data.cycleLength);
 
   const ovulationDay = new Date(nextPeriod);
   ovulationDay.setDate(nextPeriod.getDate() - 14);
@@ -37,45 +47,52 @@ function calculateCycle() {
   const lutealStart = new Date(ovulationDay);
   lutealStart.setDate(ovulationDay.getDate() + 1);
 
-
-  let regularity = "Regular";
-  let buttonClass = "regular";
-  let targetPage = "regular.html";
-  if (cycleLength < 21 || cycleLength > 35) {
-    regularity = "Irregular";
-    buttonClass = "irregular";
-    targetPage = "irregular.html";
+  if (data.cycleLength < 21 || data.cycleLength > 35) {
+    data.regularity = "Irregular";
+    data.buttonClass = "irregular";
+    data.targetPage = "irregular.html";
+  } else {
+    data.regularity = "Regular";
+    data.buttonClass = "regular";
+    data.targetPage = "regular.html";
   }
 
-  // Show results
+
+  document.getElementById("periodForm").style.display = "none";
+
   document.getElementById("results").innerHTML = `
-    <h3>Cycle Insights</h3>
-    <p><strong>Age:</strong> ${age}</p>
+    <h3>🌸 Cycle Insights</h3>
+    <p><strong>Age:</strong> ${data.age}</p>
     <p><strong>Next Period:</strong> ${nextPeriod.toDateString()}</p>
     <p><strong>Ovulation Day:</strong> ${ovulationDay.toDateString()}</p>
-    <p><strong>Luteal Phase:</strong> ${lutealStart.toDateString()} – ${new Date(nextPeriod - 86400000).toDateString()}</p>
-    <p><strong>Flow Intensity:</strong> ${flowDesc}</p>
-    <p><strong>Mood Swings:</strong> ${moodDesc}</p>
+    <p><strong>Luteal Phase:</strong>
+      ${lutealStart.toDateString()}
+      ${new Date(nextPeriod.getTime() - 86400000).toDateString()}
+    </p>
+    <p><strong>Flow:</strong> ${data.flow}</p>
+    <p><strong>Mood Swings:</strong> ${data.mood}</p>
   `;
-
-  // Set up regularity button
   const btn = document.getElementById("regularityButton");
-  btn.style.display = "block";
-  btn.className = buttonClass;
-  btn.textContent = regularity;
+  btn.style.display = "inline-block";
+  btn.className = data.buttonClass;
+  btn.textContent = data.regularity;
   btn.onclick = function() {
-    window.location.href = targetPage;
+    window.location.href = data.targetPage;
   };
 
+  renderCalendar(lastPeriod, data, ovulationDay, lutealStart, nextPeriod);
+}
   // Calendar rendering
+  function renderCalendar(startDate, data, ovulationDay, lutealStart, nextPeriod) {
+
   const calendar = document.getElementById("calendar");
   calendar.innerHTML = "";
-  for (let i = 0; i < cycleLength; i++) {
-    const day = new Date(lastPeriod);
-    day.setDate(lastPeriod.getDate() + i);
+  for (let i = 0; i < data.cycleLength; i++) {
+    const day = new Date(startDate);
+    day.setDate(startDate.getDate() + i);
 
     let className = "normal";
-    if (i < periodDuration) className = "period";
+    if (i < data.periodDuration) className = "period";
     else if (day.toDateString() === ovulationDay.toDateString()) className = "ovulation";
     else if (day >= lutealStart && day < nextPeriod) className = "luteal";
 
@@ -87,13 +104,15 @@ function calculateCycle() {
     `;
   }
 }
+window.addEventListener("pageshow", () => {
+  const saved = localStorage.getItem("periodData");
+  if (saved) {
+    calculateCycle(JSON.parse(saved));
+  }
+})
 
 function toggleChatbot() {
   const chatbot = document.getElementById("chatbot-popup");
-
-  if (chatbot.style.display === "none" || chatbot.style.display === "") {
-    chatbot.style.display = "block";
-  } else {
-    chatbot.style.display = "none";
-  }
+  chatbot.style.display =
+    chatbot.style.display === "block" ? "none" : "block";
 }
