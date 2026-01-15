@@ -2,11 +2,193 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Doctor Appointment – NurtureHer</title>
-<link rel="stylesheet" href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\css\appointment.css">
+<title>Doctor Appointment – CareHer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===== THEME VARIABLES ===== */
+:root{
+  --primary:#a53860;
+  --secondary:#ff6fae;
+  --bg:#fde4ec;
+  --card:#fff;
+  --text:#333;
+  --light:#fde4ec;
+  --white:#fff;
+  --dark:#333;
+}
+body.dark{
+  --primary:#ff6fae;
+  --secondary:#ff9ccc;
+  --bg:#1e1e1e;
+  --card:#2c2c2c;
+  --text:#eee;
+}
+
+/* ===== GLOBAL ===== */
+*{ box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  transition:0.3s;
+}
+
+/* ===== DARK MODE BUTTON ===== */
+#themeBtn{
+  position:fixed;
+  top:15px;
+  right:15px;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  border:none;
+  cursor:pointer;
+  background:var(--primary);
+  color:white;
+  font-size:18px;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.3);
+  transition:0.3s;
+}
+#themeBtn:hover{transform:scale(1.1);opacity:0.9;}
+
+/* ===== HEADER ===== */
+header{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:white;
+  padding:25px;
+  text-align:center;
+  transition:0.3s;
+}
+
+/* ===== CARD ===== */
+.card{
+  background:var(--card);
+  max-width:600px;
+  margin:40px auto;
+  padding:30px;
+  border-radius:18px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+  transition:0.3s;
+}
+body.dark .card{
+  border:2px solid transparent;
+  background-image:
+    linear-gradient(var(--card),var(--card)),
+    linear-gradient(135deg,var(--primary),var(--secondary));
+  background-origin:border-box;
+  background-clip:padding-box,border-box;
+}
+
+/* HEADINGS */
+h2{ color:var(--primary); }
+
+/* FORM */
+#appointmentForm{ display:flex; flex-direction:column; }
+label{ display:block; margin-top:12px; font-weight:bold; }
+input, select, textarea{
+  width:100%;
+  padding:10px;
+  margin-top:6px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  box-sizing:border-box;
+  background:var(--card);
+  color:var(--text);
+  transition:0.3s;
+}
+.checkbox-group label{ display:block; font-weight:normal; margin-top:6px; }
+
+/* BUTTONS */
+#appointmentForm button{
+  margin-top:30px;
+  padding:12px 35px;
+  background: linear-gradient(135deg,var(--primary),var(--secondary));
+  color:white;
+  border:none;
+  border-radius:25px;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+}
+#appointmentForm button:hover{opacity:0.9;}
+
+/* NOTE */
+.note{ font-size:13px; color:#666; margin-top:15px; text-align:center; transition:0.3s; }
+.success{
+  margin-top:15px;
+  background:#e8f5e9;
+  padding:12px;
+  border-radius:10px;
+  color:green;
+  text-align:center;
+  transition:0.3s;
+}
+body.dark .success{
+  background:#2c2c2c;
+  color:#c0f2c0;
+}
+.hidden{ display:none; }
+
+/* FOOTER */
+.footer{
+  width:100%;
+  margin-top:40px;
+  background:linear-gradient(135deg,var(--bg),#ffd6e8);
+  border-top:1px solid rgba(0,0,0,0.08);
+  transition:0.3s;
+  text-align:center;
+  padding:30px 20px;
+}
+body.dark .footer{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  border-top:1px solid #333;
+}
+.footer-content{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  text-align:center;
+}
+.footer-brand h3{ color:var(--primary); }
+body.dark .footer-brand h3{ color:white; }
+.footer-brand p{ font-size:14px; opacity:0.85; }
+.footer-links{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+}
+.footer-links a{
+  text-decoration:none;
+  color:var(--text);
+  opacity:0.85;
+}
+body.dark .footer-links a{ color:white; }
+.footer-links a:hover{ color:var(--primary); opacity:1; }
+.footer-note{ font-size:14px; opacity:0.8; }
+.footer-bottom{ font-size:13px; opacity:0.7; transition:0.3s; }
+
+/* MOBILE */
+@media(max-width:768px){
+  .footer-content{ flex-direction:column; gap:15px; }
+}
+</style>
 </head>
 
 <body>
+
+<!-- DARK MODE BUTTON -->
+<button id="themeBtn">🌙</button>
 
 <header>
   <h1>👩‍⚕️ Book Doctor Appointment</h1>
@@ -15,7 +197,6 @@
 
 <section class="card">
   <h2>Patient Details</h2>
-
   <form id="appointmentForm">
 
     <label>Full Name</label>
@@ -50,34 +231,83 @@
 
     <label>PCOD/PCOS Symptoms (Select all that apply)</label>
     <div class="checkbox-group">
-      <label><input type="checkbox"> Irregular periods</label>
-      <label><input type="checkbox"> Acne</label>
-      <label><input type="checkbox"> Weight gain</label>
-      <label><input type="checkbox"> Hair fall</label>
-      <label><input type="checkbox"> Mood swings</label>
+      <label><input type="checkbox" name="symptoms" value="Irregular periods"> Irregular periods</label>
+      <label><input type="checkbox" name="symptoms" value="Acne"> Acne</label>
+      <label><input type="checkbox" name="symptoms" value="Weight gain"> Weight gain</label>
+      <label><input type="checkbox" name="symptoms" value="Hair fall"> Hair fall</label>
+      <label><input type="checkbox" name="symptoms" value="Mood swings"> Mood swings</label>
     </div>
 
     <label>Describe Your Symptoms</label>
     <textarea id="symptoms" rows="4"></textarea>
 
     <button type="submit">Book Appointment</button>
-
   </form>
 
-  <p class="note">
-    🔒 Your information is private and confidential.
-  </p>
+  <p class="note">🔒 Your information is private and confidential.</p>
 
   <div id="successMsg" class="success hidden">
-    ✅ Appointment booked successfully!  
-    Our team will contact you shortly.
+    ✅ Appointment booked successfully! Our team will contact you shortly.
   </div>
 </section>
 
-<footer>
-  © 2026 CareHer | Women’s Healthcare Support
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <h3>Women Health Care Platform</h3>
+      <p>PCOD & PCOS Awareness Platform</p>
+    </div>
+    
+    <div class="footer-links">
+      <a href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\index.html">Home</a>
+      <a href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\pages\healthCheck.html">Health Check</a>
+      <a href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\pages\products.html">Products</a>
+      <a href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\pages\contact.html">Contact</a>
+    </div>
+    <div class="footer-note">💗 Your health, our priority</div>
+  </div>
+  <div class="footer-bottom">
+    © <span id="year"></span> Care Her. All Rights Reserved.
+  </div>
 </footer>
 
-<script src="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\js\appointment.js"></script>
+<script>
+// ===== AUTO YEAR =====
+document.getElementById("year").innerText = new Date().getFullYear();
+
+// ===== DARK MODE =====
+const themeBtn = document.getElementById("themeBtn");
+if(localStorage.getItem("theme")==="dark"){
+  document.body.classList.add("dark");
+  themeBtn.innerText="☀️";
+} else { themeBtn.innerText="🌙"; }
+themeBtn.onclick = () => {
+  document.body.classList.toggle("dark");
+  const dark = document.body.classList.contains("dark");
+  localStorage.setItem("theme", dark ? "dark" : "light");
+  themeBtn.innerText = dark ? "☀️" : "🌙";
+};
+
+// ===== FORM SUBMISSION =====
+document.getElementById("appointmentForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  const appointment = {
+    name: name.value,
+    email: email.value,
+    age: age.value,
+    doctor: doctor.value,
+    date: date.value,
+    time: time.value,
+    symptoms: Array.from(document.querySelectorAll('input[name="symptoms"]:checked')).map(cb=>cb.value),
+    description: symptoms.value
+  };
+  localStorage.setItem("appointment", JSON.stringify(appointment));
+  const successMsg = document.getElementById("successMsg");
+  successMsg.classList.remove("hidden");
+  this.reset();
+  setTimeout(()=> successMsg.classList.add("hidden"),5000);
+});
+</script>
+
 </body>
 </html>

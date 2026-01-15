@@ -2,39 +2,313 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>PCOS Self-Assessment Quiz</title>
+  <title>PCOS Self-Assessment Quiz | CareHer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\css\pcod-about.css">
+
+  <link rel="stylesheet" href="css/pcod-about.css">
+
+  <style>
+    /* ===== RESET ===== */
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+
+    /* ===== THEME VARIABLES ===== */
+    :root{
+      --primary:#d63384;
+      --secondary:#ff6fae;
+      --bg:#fff0f6;
+      --card:#ffffff;
+      --text:#333;
+    }
+    body.dark{
+      --primary:#ff6fae;
+      --secondary:#ff9ccc;
+      --bg:#1e1e1e;
+      --card:#2c2c2c;
+      --text:#eee;
+    }
+
+    body{
+      background:linear-gradient(135deg,var(--bg),#fff);
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      transition:0.3s;
+    }
+    body.dark{
+      background:linear-gradient(135deg,var(--primary),var(--bg));
+    }
+
+    /* ===== DARK MODE BUTTON ===== */
+    #themeBtn{
+      position:fixed;
+      top:15px;
+      right:15px;
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      border:none;
+      cursor:pointer;
+      background:var(--primary);
+      color:white;
+      font-size:18px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.3);
+      z-index:1000;
+    }
+
+    /* ===== QUIZ CARD ===== */
+    .quiz-wrapper{
+      max-width:700px;
+      width:90%;
+      background:var(--card);
+      border-radius:20px;
+      padding:30px;
+      margin:80px auto 40px;
+      box-shadow:0 20px 45px rgba(0,0,0,0.15);
+      text-align:center;
+    }
+
+    .quiz-wrapper h1{color:var(--primary);}
+    .subtitle{margin:10px 0 20px;opacity:0.8;}
+
+    /* ===== PROGRESS ===== */
+    .progress-box{
+      width:100%;
+      height:16px;
+      background:#ddd;
+      border-radius:10px;
+      overflow:hidden;
+      margin-bottom:10px;
+    }
+    #progressBar{
+      height:100%;
+      width:0%;
+      background:linear-gradient(to right,var(--primary),var(--secondary));
+      transition:0.4s;
+    }
+
+    /* ===== OPTIONS ===== */
+    .options{
+      display:flex;
+      justify-content:center;
+      gap:25px;
+      margin-top:25px;
+      flex-wrap:wrap;
+    }
+    .options button{
+      padding:12px 26px;
+      border:none;
+      border-radius:22px;
+      background:linear-gradient(135deg,var(--primary),var(--secondary));
+      color:white;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+    /* ===== RESULT ===== */
+    .result{
+      margin-top:25px;
+      padding:20px;
+      border-radius:20px;
+      background:var(--card);
+      box-shadow:0 10px 25px rgba(0,0,0,0.12);
+    }
+    .hidden{display:none;}
+
+    /* ===== FOOTER ===== */
+    .footer{
+  width:100%;
+  margin-top:100px;   
+  background:linear-gradient(135deg,var(--bg),#ffd6e8);
+  border-top:1px solid rgba(0,0,0,0.08);
+}
+
+
+body.dark .footer{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+}
+
+.footer-content{
+  max-width:1100px;
+  margin:auto;
+  padding:30px 20px;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  text-align:center;
+}
+
+.footer-brand h3{
+  color:var(--primary);
+}
+
+body.dark .footer-brand h3{
+  color:white;
+}
+
+.footer-links{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.footer-links a{
+  text-decoration:none;
+  color:var(--text);
+  opacity:0.85;
+  transition:0.3s;
+}
+
+.footer-links a:hover{
+  text-decoration:underline;
+}
+
+body.dark .footer-links a{
+  color:white;
+}
+
+.footer-note{
+  font-size:14px;
+  opacity:0.8;
+}
+
+.footer-bottom{
+  text-align:center;
+  padding:12px;
+  font-size:13px;
+  background:rgba(255,255,255,0.5);
+}
+
+body.dark .footer-bottom{
+  background:rgba(0,0,0,0.4);
+  color:white;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+  .footer-content{
+    flex-direction:column;
+    gap:20px;
+  }
+}
+  </style>
 </head>
 
 <body>
+
+<button id="themeBtn">🌙</button>
 
 <section class="quiz-wrapper">
 
   <h1>🌸 PCOS Self-Assessment</h1>
   <p class="subtitle">Answer honestly to understand your hormonal health</p>
 
-  <!-- Progress -->
   <div class="progress-box">
     <div id="progressBar"></div>
   </div>
   <p id="quizProgress"></p>
 
-  <!-- Question Card -->
-  <div class="quiz-card" id="quizCard">
+  <div id="quizCard">
     <h2 id="quizQuestion"></h2>
-
     <div class="options">
-      <button class="yes" onclick="answer(true)">Yes</button>
-      <button class="no" onclick="answer(false)">No</button>
+      <button onclick="answer(true)">Yes</button>
+      <button onclick="answer(false)">No</button>
     </div>
   </div>
 
-  <!-- Result -->
   <div id="quizResult" class="result hidden"></div>
-
 </section>
 
-<script src="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\js\pcos-about.js"></script>
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <h3>Women health care platform</h3>
+      <p>PCOD & PCOS Awareness Platform</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\index.html">Home</a>
+      <a href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\pages\healthCheck.html">Health Check</a>
+      <a href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\pages\products.html">Products</a>
+      <a href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\pages\contact.html">Contact</a>
+    </div>
+    <div class="footer-note">💗 Your health, our priority</div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 CareHer. All rights reserved.
+</footer>
+
+<script>
+  /* ===== DARK MODE ===== */
+  const themeBtn=document.getElementById("themeBtn");
+  themeBtn.onclick = () => {
+    document.body.classList.toggle("dark");
+  };
+
+  /* ===== QUIZ ===== */
+  const questions=[
+    "Do you have irregular periods?",
+    "Excess facial/body hair?",
+    "Frequent acne?",
+    "Weight gain issues?",
+    "Hair thinning?",
+    "Mood swings?",
+    "Sugar cravings?",
+    "Low energy?",
+    "Insulin resistance?",
+    "Family history of PCOS?"
+  ];
+
+  let current=0, score=0;
+
+  const qEl=document.getElementById("quizQuestion");
+  const pEl=document.getElementById("quizProgress");
+  const bar=document.getElementById("progressBar");
+  const result=document.getElementById("quizResult");
+  const card=document.getElementById("quizCard");
+
+  function loadQuestion(){
+    qEl.innerText=questions[current];
+    pEl.innerText=`Question ${current+1} of ${questions.length}`;
+    bar.style.width=(current/questions.length)*100+"%";
+  }
+  loadQuestion();
+
+  function answer(val){
+    if(val) score++;
+    current++;
+    current<questions.length?loadQuestion():showResult();
+  }
+
+  function showResult(){
+    card.style.display="none";
+    pEl.style.display="none";
+    bar.style.width="100%";
+
+    let msg = score<=3
+      ?"Low risk. Maintain healthy lifestyle."
+      :score<=6
+      ?"Moderate risk. Monitor & improve habits."
+      :"High risk. Consult a doctor.";
+
+    localStorage.setItem("pcosScore",score);
+
+    result.classList.remove("hidden");
+    result.innerHTML=`
+      <h3>Assessment Completed</h3>
+      <p>${msg}</p>
+      <p><strong>Score:</strong> ${score}/10</p>
+      <button id="nextBtn">Check PCOS Risk</button>
+    `;
+
+    // Add click event to next button
+    document.getElementById("nextBtn").onclick = () => {
+      window.location.href = "pcos-risk.html";
+    };
+  }
+</script>
+
 </body>
 </html>

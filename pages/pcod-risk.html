@@ -1,29 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>PCOD Risk Quiz</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\css\pcod-risk.css">
+<meta charset="UTF-8">
+<title>PCOD Risk Quiz | Care Her</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===== THEME VARIABLES ===== */
+:root{
+  --primary:#d63384;
+  --secondary:#ff6fae;
+  --bg:#fff0f6;
+  --card:#ffffff;
+  --text:#333;
+}
+
+body.dark{
+  --primary:#ff6fae;
+  --secondary:#ff9ccc;
+  --bg:#1e1e1e;
+  --card:#2c2c2c;
+  --text:#eee;
+}
+
+/* ===== GLOBAL ===== */
+*{ box-sizing:border-box; font-family:Segoe UI,sans-serif; }
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  transition:0.3s;
+  padding-top:80px;
+}
+
+/* ===== DARK MODE BUTTON ===== */
+#themeBtn{
+  position:fixed;
+  top:15px;
+  right:15px;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  border:none;
+  cursor:pointer;
+  background:var(--primary);
+  color:white;
+  font-size:18px;
+  z-index:1000;
+}
+
+/* ===== QUIZ CARD ===== */
+.card{
+  width:380px;
+  background:var(--card);
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  text-align:center;
+}
+
+.sub{ font-size:14px; opacity:0.7; }
+
+.progress{
+  height:8px;
+  background:#ddd;
+  border-radius:10px;
+  overflow:hidden;
+  margin:15px 0;
+}
+
+#bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(to right,var(--primary),var(--secondary));
+  transition:0.4s;
+}
+
+.game-options button{
+  width:100%;
+  margin:6px 0;
+  padding:12px;
+  border:none;
+  border-radius:25px;
+  cursor:pointer;
+  background:var(--primary);
+  color:white;
+}
+
+.game-options .mid{ background:var(--secondary); }
+.game-options .secondary{ background:#ddd; color:#333; }
+
+.hidden{ display:none; }
+
+#badge{
+  display:inline-block;
+  padding:6px 14px;
+  border-radius:20px;
+  margin:10px 0;
+}
+
+.low{ background:#e8f5e9; color:green; }
+.medium{ background:#fff3e0; color:#ff9800; }
+.high{ background:#fdecea; color:red; }
+
+ul{ text-align:left; font-size:14px; }
+
+.actions{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:8px;
+}
+
+.actions button{
+  padding:10px;
+  border:none;
+  border-radius:20px;
+  background:var(--primary);
+  color:white;
+  font-size:13px;
+  cursor:pointer;
+}
+
+.big-btn{
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  font-size:16px;
+  border:none;
+  border-radius:15px;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:white;
+}
+
+.restart{
+  margin-top:10px;
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:15px;
+  background:var(--secondary);
+  color:white;
+}
+
+/* ===== FOOTER ===== */
+.footer{
+  width:100%;
+  margin-top:40px;
+  background:linear-gradient(135deg,var(--bg),#ffd6e8);
+  border-top:1px solid rgba(0,0,0,0.08);
+}
+
+body.dark .footer{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+}
+
+.footer-content{
+  max-width:1100px;
+  margin:auto;
+  padding:30px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  text-align:center;
+}
+
+.footer-links{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.footer-links a{
+  text-decoration:none;
+  color:var(--text);
+  opacity:0.85;
+}
+
+.footer-bottom{
+  text-align:center;
+  padding:12px;
+  font-size:13px;
+  opacity:0.7;
+  background:rgba(255,255,255,0.5);
+}
+
+body.dark .footer-bottom{
+  background:rgba(0,0,0,0.4);
+}
+</style>
 </head>
 
 <body>
 
-<div class="card">
+<button id="themeBtn">🌙</button>
 
+<div class="card">
   <h2>🌸 PCOD Risk Quiz</h2>
   <p class="sub">Answer honestly to understand your health</p>
 
-  <!-- Progress -->
-  <div class="progress">
-    <div id="bar"></div>
-  </div>
+  <div class="progress"><div id="bar"></div></div>
   <p id="levelText"></p>
 
-  <!-- Question -->
   <h3 id="question"></h3>
 
-  <!-- Options -->
   <div class="game-options">
     <button onclick="answer(2)">✔ Yes</button>
     <button class="mid" onclick="answer(1)">➖ Sometimes</button>
@@ -32,51 +217,117 @@
 
   <p id="feedback"></p>
 
-  <!-- RESULT -->
   <div id="resultBox" class="hidden">
     <h2 id="resultTitle"></h2>
     <span id="badge"></span>
     <p id="scoreText"></p>
-
     <ul id="steps"></ul>
 
-    <!-- SMALL BUTTONS -->
     <div class="actions">
       <button onclick="openProducts()">🛍 Products</button>
-      <button onclick="toggleChat()">💬 Chat</button>
       <button onclick="openDoctor()">👩‍⚕️ Doctor</button>
+      <button onclick="openDiet()">🥗 Diet</button>
     </div>
 
-    <!-- BIG NEXT BUTTON -->
-    <div class="next-btn">
-      <button class="big-btn" onclick="openDiet()">➡ Diet & Lifestyle</button>
-    </div>
-
-    <button class="restart" onclick="restartQuiz()">🔁 Restart Quiz</button>
-
-    <p class="note">⚠ Awareness tool only. Not a diagnosis.</p>
-  </div>
-
-</div>
-
-<!-- CHAT SUPPORT -->
-<div id="chatbot" class="chatbot hidden">
-  <div class="chat-header">
-    PCOD Chat Support 💗
-    <span onclick="toggleChat()">✖</span>
-  </div>
-
-  <div class="chat-body" id="chatBody">
-    <div class="bot">Hello 🌸 How can I help you?</div>
-  </div>
-
-  <div class="chat-input">
-    <input type="text" id="chatInput" placeholder="Ask about PCOD..." />
-    <button onclick="sendMessage()">Send</button>
+    <button class="restart" onclick="restartQuiz()">🔁 Restart</button>
   </div>
 </div>
 
-<!-- JS FILE -->
-<script src="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\js\pcod-risk.js"></script>
+<footer class="footer">
+  <div class="footer-content">
+    <div>
+      <h3>🌸 Care Her</h3>
+      <p>PCOD & PCOS Awareness Platform</p>
+    </div>
+   <div class="footer-links">
+      <a href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\index.html">Home</a>
+      <a href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\pages\healthCheck.html">Health Check</a>
+      <a href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\pages\products.html">Products</a>
+      <a href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\pages\contact.html">Contact</a>
+    </div>
+    <div>💗 Your health, our priority</div>
+  </div>
+  <div class="footer-bottom">
+    © <span id="year"></span> Care Her. All rights reserved.
+  </div>
+</footer>
+
+<script>
+/* ===== DARK MODE ===== */
+const themeBtn=document.getElementById("themeBtn");
+if(localStorage.getItem("theme")==="dark"){
+  document.body.classList.add("dark");
+  themeBtn.innerText="☀️";
+}
+themeBtn.onclick=()=>{
+  document.body.classList.toggle("dark");
+  const dark=document.body.classList.contains("dark");
+  localStorage.setItem("theme",dark?"dark":"light");
+  themeBtn.innerText=dark?"☀️":"🌙";
+};
+
+document.getElementById("year").innerText=new Date().getFullYear();
+
+/* ===== QUIZ LOGIC ===== */
+const questions=[
+  "Do you have irregular periods?",
+  "Do you gain weight easily?",
+  "Do you have acne or facial hair?",
+  "Do you experience hair fall?",
+  "Do you crave junk food?",
+  "Do you feel mood swings?",
+  "Family history of PCOD?"
+];
+
+let index=0,score=0;
+const q=document.getElementById("question");
+const bar=document.getElementById("bar");
+const level=document.getElementById("levelText");
+const feedback=document.getElementById("feedback");
+
+loadQuestion();
+
+function loadQuestion(){
+  q.innerText=questions[index];
+  level.innerText=`Question ${index+1} of ${questions.length}`;
+  bar.style.width=(index/questions.length)*100+"%";
+}
+
+function answer(val){
+  score+=val;
+  index++;
+  feedback.innerText="💗 Thank you for sharing";
+  index<questions.length?loadQuestion():showResult();
+}
+
+function showResult(){
+  document.querySelector(".game-options").style.display="none";
+  q.style.display="none";
+  level.style.display="none";
+  bar.style.width="100%";
+
+  let title,badge,cls,steps;
+  if(score<=5){title="🟢 Low Risk";badge="LOW";cls="low";steps=["Healthy diet","Exercise","Track cycle"];}
+  else if(score<=10){title="🟡 Moderate Risk";badge="MEDIUM";cls="medium";steps=["Reduce sugar","Stress control","Lifestyle care"];}
+  else{title="🔴 High Risk";badge="HIGH";cls="high";steps=["Consult doctor","Hormone tests","Medical care"];}
+
+  document.getElementById("resultTitle").innerText=title;
+  document.getElementById("scoreText").innerText="Score: "+score;
+  const b=document.getElementById("badge");
+  b.innerText=badge;b.className=cls;
+
+  const s=document.getElementById("steps");
+  s.innerHTML="";
+  steps.forEach(i=>s.innerHTML+=`<li>✔ ${i}</li>`);
+
+  document.getElementById("resultBox").classList.remove("hidden");
+}
+
+function restartQuiz(){ localStorage.clear(); location.reload(); }
+function openProducts(){ window.location.href="pcod-products.html"; }
+function openDoctor(){ window.location.href="pcod-doctor.html"; }
+function openDiet(){ window.location.href="pcod-diet-lifestyle.html"; }
+</script>
+
 </body>
 </html>

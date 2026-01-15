@@ -1,73 +1,322 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Care Her – PCOD & PCOS</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Care Her – PCOD & PCOS</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\css\p.css">
+<style>
+/* ================= THEME VARIABLES ================= */
+:root{
+  --primary:#d63384;
+  --secondary:#ff6fae;
+  --bg:#fff0f6;
+  --card:#ffffff;
+  --text:#333;
+  --nav-bg:#fff0f6;
+  --nav-link:#333;
+  --hero-bg:#fde4ec;
+}
+body.dark{
+  --primary:#ff6fae;
+  --secondary:#ff9ccc;
+  --bg:#1e1e1e;
+  --card:#2c2c2c;
+  --text:#eee;
+  --nav-bg:#2c2c2c;
+  --nav-link:#eee;
+  --hero-bg:#2c2c2c;
+}
+
+/* ================= GLOBAL ================= */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Roboto',sans-serif;}
+body{background:var(--bg);color:var(--text);transition:.3s;}
+
+/* ================= NAVBAR ================= */
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 30px;
+  background:var(--nav-bg);
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+  position:sticky;
+  top:0;
+  z-index:999;
+}
+.nav-left{display:flex;align-items:center;gap:10px;}
+.nav-logo{width:40px;height:40px;}
+.nav-name{font-size:20px;font-weight:700;color:var(--primary);}
+.menu{display:flex;align-items:center;gap:20px;}
+.menu a{
+  text-decoration:none;
+  color:var(--nav-link);
+  font-weight:500;
+  padding:6px 12px;
+  border-radius:8px;
+  transition:.3s;
+}
+.menu a:hover{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:#fff;
+}
+.menu-toggle{display:none;font-size:22px;cursor:pointer;color:var(--nav-link);}
+.nav-clock{font-size:12px;text-align:center;}
+.theme-toggle{
+  border:none;
+  padding:6px 10px;
+  border-radius:10px;
+  cursor:pointer;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:white;
+}
+
+/* LOGIN ICON */
+.login-icon img{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+/* MOBILE NAV */
+@media(max-width:768px){
+  .menu{
+    position:absolute;
+    top:65px;
+    right:-260px;
+    flex-direction:column;
+    background:var(--nav-bg);
+    padding:15px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,.2);
+    transition:.3s;
+  }
+  .menu.active{right:15px;}
+  .menu-toggle{display:block;}
+}
+
+/* ================= HERO ================= */
+.hero{
+  background:var(--hero-bg);
+  text-align:center;
+  padding:60px 20px;
+}
+.hero h1{color:var(--primary);font-size:36px;}
+
+/* ================= CARD ================= */
+.card{
+  max-width:900px;
+  margin:30px auto;
+  background:var(--card);
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 20px 45px rgba(0,0,0,.15);
+}
+.card h2{text-align:center;color:var(--primary);}
+.card p{text-align:center;opacity:.7;margin:15px 0 30px;}
+.choice-buttons{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;}
+.choice-box{
+  flex:1 1 220px;
+  background:var(--hero-bg);
+  padding:20px;
+  border-radius:16px;
+  text-align:center;
+  cursor:pointer;
+  transition:.3s;
+}
+.choice-box:hover{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:white;
+  transform:translateY(-5px);
+}
+
+
+/* ===== FOOTER ===== */
+.footer{
+  width:100%;
+  margin-top:100px;   
+  background:linear-gradient(135deg,var(--bg),#ffd6e8);
+  border-top:1px solid rgba(0,0,0,0.08);
+}
+
+
+body.dark .footer{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+}
+
+.footer-content{
+  max-width:1100px;
+  margin:auto;
+  padding:30px 20px;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  text-align:center;
+}
+
+.footer-brand h3{
+  color:var(--primary);
+}
+
+body.dark .footer-brand h3{
+  color:white;
+}
+
+.footer-links{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.footer-links a{
+  text-decoration:none;
+  color:var(--text);
+  opacity:0.85;
+  transition:0.3s;
+}
+
+.footer-links a:hover{
+  text-decoration:underline;
+}
+
+body.dark .footer-links a{
+  color:white;
+}
+
+.footer-note{
+  font-size:14px;
+  opacity:0.8;
+}
+
+.footer-bottom{
+  text-align:center;
+  padding:12px;
+  font-size:13px;
+  background:rgba(255,255,255,0.5);
+}
+
+body.dark .footer-bottom{
+  background:rgba(0,0,0,0.4);
+  color:white;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+  .footer-content{
+    flex-direction:column;
+    gap:20px;
+  }
+}
+
+
+</style>
 </head>
+
 <body>
 
-  <!-- ===== NAVBAR ===== -->
-  <nav class="navbar">
-    <div class="nav-left">
-      <img src="./images/logo.png" alt="logo" class="nav-logo">
-      <span class="nav-name">Care Her</span>
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <div class="nav-left">
+    <img src="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\images\logo.png" class="nav-logo">
+    <span class="nav-name">Care Her</span>
+  </div>
+
+  <div class="menu" id="menu">
+    <a href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\index.html">Home</a>
+    <a href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\pages\healthCheck.html">Health Check</a>
+    <a href="exercise.html">Exercise</a>
+    <a href="contact.html">Contact</a>
+    <a href="review.html">Reviews</a>
+
+    <a href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\pages\signup.html" class="login-icon">
+      <img src="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\images\woman.png">
+    </a>
+
+    <div class="nav-clock">
+      <span id="dateSpan"></span><br>
+      <span id="timeSpan"></span>
     </div>
 
-    <div class="menu" id="menu">
-      <a href="index.html" class="active">Home</a>
-      <a href="./pages/healthCheck.html">Health Check</a>
-      <a href="./pages/products.html">Products</a>
-      <a href="./pages/contact.html">Contact</a>
-      <a href="./pages/reviews.html">Reviews</a>
-      <a href="./pages/login.html"><img src="./images/woman.png" alt="login" class="user-icon"></a>
+    <button class="theme-toggle" id="themeBtn">🌙</button>
+  </div>
 
-      <div class="nav-clock">
-        <span id="dateSpan"></span>
-        <span id="timeSpan"></span>
-      </div>
+  <span class="menu-toggle" onclick="toggleMenu()">☰</span>
+</nav>
 
-      <button class="theme-toggle" id="themeBtn">🌙 Dark Mode</button>
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <h1>Your Companion for PCOD & PCOS Awareness</h1>
+</header>
+
+<!-- ===== CARD ===== -->
+<section class="card">
+  <h2>Choose What You Want to Learn</h2>
+  <p>Select a condition to understand symptoms, risks and care.</p>
+  <div class="choice-buttons">
+    <div class="choice-box" onclick="goPCOD()">🌺 PCOD</div>
+    <div class="choice-box" onclick="goPCOS()">🌼 PCOS</div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <h3>Women health care platform</h3>
+      <p>PCOD & PCOS Awareness Platform</p>
     </div>
 
-    <span class="menu-toggle" onclick="toggleMenu()">☰</span>
-  </nav>
-
-  <!-- ===== HERO ===== -->
-  <header class="hero">
-    <h1>🌸 Care Her</h1>
-    <p>Your Companion for PCOD & PCOS Awareness</p>
-  </header>
-
-  <!-- ===== MAIN CARD ===== -->
-  <section class="card center">
-    <h2>Choose What You Want to Learn</h2>
-    <p>PCOD and PCOS affect women differently. Select one to understand symptoms, risks, and care guidance.</p>
-
-    <div class="choice-buttons">
-      <div class="choice-box pcod" onclick="goPCOD()">
-        <h3>🌺 PCOD</h3>
-        <p>Lifestyle-related hormonal imbalance</p>
-      </div>
-
-      <div class="choice-box pcos" onclick="goPCOS()">
-        <h3>🌼 PCOS</h3>
-        <p>Chronic hormonal & ovulation condition</p>
-      </div>
+    <div class="footer-links">
+      <a href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\index.html">Home</a>
+      <a href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\pages\healthCheck.html">Health Check</a>
+      <a href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\pages\products.html">Products</a>
+      <a href="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\pages\contact.html">Contact</a>
     </div>
-  </section>
 
-  <footer>
-    © 2026 Care Her | Women’s Health Matters
-  </footer>
+    <div class="footer-note">💗 Your health, our priority</div>
+  </div>
 
-  <!-- JS -->
-  <script src="C:\Users\aksha\OneDrive\Desktop\ICP-13-html-css-js-github-group-project-3-CareHer-Health-care-platform-for-womens-\js\p.js"></script>
+  <div class="footer-bottom">
+    © <span id="year"></span> Care Her. All rights reserved.
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+  document.getElementById("menu").classList.toggle("active");
+}
+
+function updateClock(){
+  const n=new Date();
+  dateSpan.innerText=n.toDateString();
+  timeSpan.innerText=n.toLocaleTimeString();
+}
+updateClock();
+setInterval(updateClock,1000);
+
+const themeBtn=document.getElementById("themeBtn");
+if(localStorage.getItem("theme")==="dark"){
+  document.body.classList.add("dark");
+  themeBtn.innerText="☀️ Light Mode";
+}
+themeBtn.onclick=()=>{
+  document.body.classList.toggle("dark");
+  localStorage.setItem("theme",
+    document.body.classList.contains("dark")?"dark":"light"
+  );
+  themeBtn.innerText=document.body.classList.contains("dark")
+    ?"☀️ Light Mode":"🌙 Dark Mode";
+};
+
+function goPCOD(){location.href="pcod-about.html";}
+function goPCOS(){location.href="pcos-about.html";}
+
+footerYear.innerText=`© ${new Date().getFullYear()} Care Her. All rights reserved.`;
+</script>
+
 </body>
 </html>
