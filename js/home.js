@@ -29,7 +29,7 @@ function saveUserName() {
 
   localStorage.setItem("careHerUser", name);
 
-  const sentence = `Welcome to HealthCare website, ${name} 💖`;
+  const sentence = `Welcome to Womens HealthCare website, ${name} `;
   const words = sentence.split(" ");
   let index = 0;
 
@@ -62,3 +62,10 @@ function showStoredUser() {
 }
 
 showStoredUser();
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    const para = document.querySelector(".home-para");
+    para.style.opacity = "1";
+    para.style.transform = "translateY(0)";
+  }, 800);
+});

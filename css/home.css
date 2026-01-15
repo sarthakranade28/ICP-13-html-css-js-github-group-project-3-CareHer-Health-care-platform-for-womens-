@@ -151,3 +151,47 @@ body {
   color: #ea1068;
   font-size: 52px;
 }
+/* Center the tagline section */
+.tagline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;   /* space from welcome text */
+}
+
+/* Make the image a perfect circle */
+.tagline img {
+  width: 420px;              /* adjust if needed */
+  aspect-ratio: 1 / 1;       /* keeps it square */
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 20px 45px rgba(234, 16, 104, 0.25);
+}
+.home-para {
+  max-width: 950px;
+  margin: 40px auto;
+  padding: 25px 30px;
+
+  background: #fff0f7;
+  border-radius: 18px;
+
+  font-size: 19px;
+  line-height: 1.8;
+  color: #8f1d4e;
+  text-align: center;
+
+  font-family: "Segoe UI", sans-serif;
+
+  box-shadow: 0 10px 30px rgba(233, 30, 99, 0.15);
+
+  /* animation initial state */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.home-para strong {
+  color: #e91e63;
+  font-weight: 600;
+}
+
