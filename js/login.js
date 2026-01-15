@@ -40,9 +40,6 @@ window.onload= function(){
                 toggleLight();
             }
         }
-   
-
-
 function toggleTheme(){
             const toggleBtn=document.getElementById("toggle-btn");
             const localStorageTheme=localStorage.getItem("theme");
@@ -99,7 +96,9 @@ function toggleTheme(){
            const pass=document.getElementById("pass");
             body.style.backgroundColor="#fff7fb";
              email1.style.backgroundColor="#fff7fb";
+             email1.style.color="#000";
             pass.style.backgroundColor="#fff7fb";
+            pass.style.color="#000";
             body.style.color="black";
             formContainer.style.backgroundColor="white";
             navbar.style.backgroundColor="#ffbfec";
