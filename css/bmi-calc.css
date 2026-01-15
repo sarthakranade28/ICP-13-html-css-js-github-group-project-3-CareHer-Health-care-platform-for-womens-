@@ -128,3 +128,8 @@
       cursor: pointer;
       width: 60px;
     }
+    @media (max-width: 600px) {
+    .product {
+        width: 100%;
+    }
+}
