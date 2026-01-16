@@ -87,6 +87,16 @@ body {
   font-weight: 700;
   color: #a81f5a;
 }
+.theme-toggle {
+  border: none;
+  background: white;
+  color: #c93779;
+  font-size: 18px;
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
 
 
 .health-container {
@@ -186,6 +196,61 @@ body {
   transform: scale(1.05);
 }
 
+/* ================= DARK MODE ================= */
+
+body.dark {
+  background: #1e1e1e;
+  color: #ffffff;
+}
+
+/* Navbar */
+body.dark .navbar {
+  background-color: #121212;
+}
+
+body.dark .nav-name,
+body.dark .menu a,
+body.dark .nav-clock {
+  color: #ff8fc4;
+}
+
+/* Health section */
+body.dark .health-container h2 {
+  color: #ff8fc4;
+}
+
+body.dark .subtitle {
+  color: #ffc1dc;
+}
+
+/* Cards */
+body.dark .health-card {
+  background: #2a2a2a;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+}
+
+body.dark .health-card::before {
+  background: linear-gradient(135deg, #3a3a3a, #2a2a2a);
+}
+
+body.dark .health-card h3 {
+  color: #ff9fcf;
+}
+
+body.dark .health-card p {
+  color: #e5b6cb;
+}
+
+/* Buttons */
+body.dark .health-card button {
+  background: linear-gradient(135deg, #ff5fa2, #c93779);
+}
+
+/* Toggle button dark */
+body.dark .theme-toggle {
+  background: #000;
+  color: #fff;
+}
 
 @media (max-width: 768px) {
   .navbar {

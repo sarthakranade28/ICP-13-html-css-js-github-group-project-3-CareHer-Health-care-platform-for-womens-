@@ -22,3 +22,24 @@ document.querySelectorAll(".health-card button").forEach(button => {
     }, 300);
   });
 });
+const toggleBtn = document.getElementById("themeToggle");
+
+/* Load theme on refresh */
+window.addEventListener("load", () => {
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark");
+    toggleBtn.innerText = "☀️";
+  }
+});
+
+function toggleTheme() {
+  document.body.classList.toggle("dark");
+
+  if (document.body.classList.contains("dark")) {
+    localStorage.setItem("theme", "dark");
+    toggleBtn.innerText = "☀️";
+  } else {
+    localStorage.setItem("theme", "light");
+    toggleBtn.innerText = "🌙";
+  }
+}
