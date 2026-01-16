@@ -90,6 +90,18 @@ body {
   font-weight: 700;
   color: #a81f5a;
 }
+.theme-toggle {
+  border: none;
+  background: white;
+  color: #c93779;
+  font-size: 18px;
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
 #askName {
   font-size: 52px;
   font-weight: 900;
@@ -190,5 +202,66 @@ body {
 .home-para strong {
   color: #e91e63;
   font-weight: 600;
+}
+
+body.dark {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+body.dark .navbar {
+  background-color: #121212;
+}
+
+body.dark .nav-name,
+body.dark .menu a,
+body.dark .nav-clock {
+  color: #ff9fcf;
+}
+
+body.dark .menu a:hover {
+  color: #ff5fa2;
+}
+
+body.dark #askName,
+body.dark #welcomeMessage {
+  color: #ff8fc4;
+}
+
+body.dark #welcomeMessage span {
+  color: #ff5fa2;
+}
+
+body.dark .welcome-container input {
+  background: #2a2a2a;
+  color: white;
+  border-color: #ff5fa2;
+}
+
+body.dark .welcome-container input::placeholder {
+  color: #cfa0b6;
+}
+
+body.dark .welcome-container button {
+  background: linear-gradient(135deg, #ff5fa2, #c93779);
+}
+
+body.dark .tagline img {
+  box-shadow: 0 20px 45px rgba(0,0,0,0.6);
+}
+
+body.dark .home-para {
+  background: #2a2a2a;
+  color: #e6c1d3;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.6);
+}
+
+body.dark .home-para strong {
+  color: #ff7db8;
+}
+
+body.dark .theme-toggle {
+  background: #000;
+  color: white;
 }
 
