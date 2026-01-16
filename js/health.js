@@ -24,7 +24,6 @@ document.querySelectorAll(".health-card button").forEach(button => {
 });
 const toggleBtn = document.getElementById("themeToggle");
 
-/* Load theme on refresh */
 window.addEventListener("load", () => {
   if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark");
